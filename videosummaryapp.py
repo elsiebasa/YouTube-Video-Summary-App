@@ -84,13 +84,13 @@ if st.button('Summarize!'):
                 # Attempt to generate summary
                 raw_text = youtube_get.youtube_sub(user_input)
                 summary=youtube_get.chunk_and_summarize(raw_text, chunk_size=300)
-                condense_summ=youtube_get.remove_redundant_sentences(summary, similarity_threshold=.6)
-                clean_sum=youtube_get.capitalize_sentences_and_combine(condense_summ)
+                #condense_summ=youtube_get.remove_redundant_sentences(summary, similarity_threshold=.6)
+                #clean_sum=youtube_get.capitalize_sentences_and_combine(condense_summ)
 
-                st.write(clean_sum)
+                st.write(summary)
             except Exception as e:
                 # Handle any errors that occur
-                st.write(f"An error occurred: Please enter Valid Link")
+                st.write(f"An error occurred: Please enter Valid Link{e}")
     else:
         st.write("Please enter a valid YouTube link")
 
