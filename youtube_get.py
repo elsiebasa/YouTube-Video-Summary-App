@@ -33,16 +33,17 @@ def youtube_sub(link):
 
   return subtitle
 
-def summarize_chunk(chunk,model_name = 't5-base'):
+def summarize_chunk(chunk):
     # Load model and token
-    tokenizer = T5Tokenizer.from_pretrained(model_name)
-    model = T5ForConditionalGeneration.from_pretrained(model_name)
+    tokenizer = T5Tokenizer.from_pretrained('t5-base')
+    model = T5ForConditionalGeneration.from_pretrained('t5-base')
     input_text = "summarize: " + chunk
     inputs = tokenizer.encode(input_text, return_tensors='pt', max_length=512, truncation=True)
     summary_ids = model.generate(inputs, max_length=100, min_length=10, length_penalty=2.5, num_beams=5, early_stopping=True)
     return tokenizer.decode(summary_ids[0], skip_special_tokens=True)
 
 def chunk_and_summarize(text, chunk_size=300):
+    tokenizer = T5Tokenizer.from_pretrained('t5-base')
     tokens = tokenizer.encode(text)
     chunk_summaries = []
     for i in range(0, len(tokens), chunk_size):

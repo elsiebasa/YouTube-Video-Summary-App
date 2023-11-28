@@ -13,6 +13,7 @@ Original file is located at
 
 import youtube_get
 import streamlit as st
+import sentencepiece
 import youtube_transcript_api
 from youtube_transcript_api import YouTubeTranscriptApi
 import nltk
@@ -28,6 +29,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 import numpy as np
 from pytube import YouTube
+
 
 col1,col2= st.columns([3, 1])
 
@@ -84,10 +86,10 @@ if st.button('Summarize!'):
                 # Attempt to generate summary
                 raw_text = youtube_get.youtube_sub(user_input)
                 summary=youtube_get.chunk_and_summarize(raw_text, chunk_size=300)
-                #condense_summ=youtube_get.remove_redundant_sentences(summary, similarity_threshold=.6)
-                #clean_sum=youtube_get.capitalize_sentences_and_combine(condense_summ)
+                condense_summ=youtube_get.remove_redundant_sentences(summary, similarity_threshold=.6)
+                clean_sum=youtube_get.capitalize_sentences_and_combine(condense_summ)
 
-                st.write(summary)
+                st.write(clean_sum)
             except Exception as e:
                 # Handle any errors that occur
                 st.write(f"An error occurred: Please enter Valid Link{e}")
