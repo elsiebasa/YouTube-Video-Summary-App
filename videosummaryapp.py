@@ -83,9 +83,9 @@ if st.button('Summarize'):
             try:
                 # Attempt to generate summary
                 text = youtube_get.youtube_sub(user_input)
-                summary=chunk_and_summarize(text, chunk_size=300)
-                summary_text=remove_redundant_sentences(text, similarity_threshold=.6)
-                clean_sum=capitalize_sentences_and_combine(summary_text)
+                summary=youtube_get.chunk_and_summarize(text, chunk_size=300)
+                summary_text=ryoutube_get.emove_redundant_sentences(text, similarity_threshold=.6)
+                clean_sum=youtube_get.capitalize_sentences_and_combine(summary_text)
 
 
                 st.write(clean_sum)
