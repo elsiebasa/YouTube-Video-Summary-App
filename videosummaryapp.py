@@ -77,14 +77,14 @@ if user_input:
     st.write(f"An error occurred: URL not found")
 
 # Button to perform action
-if st.button('Summarize'):
+if st.button('Summarize!'):
     if user_input:
         with st.spinner('Generating video summary...'):
             try:
                 # Attempt to generate summary
                 text = youtube_get.youtube_sub(user_input)
                 summary=youtube_get.chunk_and_summarize(text, chunk_size=300)
-                summary_text=ryoutube_get.emove_redundant_sentences(text, similarity_threshold=.6)
+                summary_text=youtube_get.remove_redundant_sentences(text, similarity_threshold=.6)
                 clean_sum=youtube_get.capitalize_sentences_and_combine(summary_text)
 
 
