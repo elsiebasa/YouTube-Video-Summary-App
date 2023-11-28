@@ -82,11 +82,10 @@ if st.button('Summarize!'):
         with st.spinner('Generating video summary...'):
             try:
                 # Attempt to generate summary
-                text = youtube_get.youtube_sub(user_input)
-                summary=youtube_get.chunk_and_summarize(text, chunk_size=300)
-                summary_text=youtube_get.remove_redundant_sentences(text, similarity_threshold=.6)
-                clean_sum=youtube_get.capitalize_sentences_and_combine(summary_text)
-
+                raw_text = youtube_get.youtube_sub(user_input)
+                summary=youtube_get.chunk_and_summarize(raw_text, chunk_size=300)
+                condense_summ=youtube_get.remove_redundant_sentences(summary, similarity_threshold=.6)
+                clean_sum=youtube_get.capitalize_sentences_and_combine(condense_summ)
 
                 st.write(clean_sum)
             except Exception as e:
